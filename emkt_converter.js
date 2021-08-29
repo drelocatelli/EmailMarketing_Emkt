@@ -308,9 +308,9 @@ window.onload = function(){
         // mobile table
 
         if(td.hasAttribute('mobile')){
-            td.offsetParent.classList.add('mobshow')
+            td.classList.add('mobshow')
             td.removeAttribute('mobile')            
-            tableClasses.push(td.offsetParent)
+            tableClasses.push(td)
         }else{
             if(td.hasAttribute('table-style')){
                 tableStyles.push(td)
@@ -334,7 +334,7 @@ window.onload = function(){
         tableClass.removeAttribute('table-class')
         if(tableClass.classList.contains('mobshow')){
             tableClass.style.display = 'none'
-            tableClass.childNodes[0].childNodes[0].outerHTML = `<!--[if !mso]><!-->${tableClass.childNodes[0].childNodes[0].outerHTML}<!--<![endif]-->`
+            tableClass.parentElement.outerHTML = `<!--[if !mso]><!-->${tableClass.parentElement.outerHTML}<!--<![endif]-->`
         }
     })
 
