@@ -308,10 +308,9 @@ window.onload = function(){
         // mobile table
 
         if(td.hasAttribute('mobile')){
-            td = td.offsetParent
-            td.classList.add('mobshow')
+            td.offsetParent.classList.add('mobshow')
             td.removeAttribute('mobile')            
-            tableClasses.push(td)
+            tableClasses.push(td.offsetParent)
         }else{
             if(td.hasAttribute('table-style')){
                 tableStyles.push(td)
@@ -335,8 +334,6 @@ window.onload = function(){
         tableClass.removeAttribute('table-class')
         if(tableClass.classList.contains('mobshow')){
             tableClass.style.display = 'none'
-            
-            console.log(tableClass)
         }
     })
 
