@@ -305,6 +305,7 @@ window.onload = function(){
     let tableClasses = new Array()
 
     tds.forEach(td =>{
+          
         // mobile table
 
         if(td.hasAttribute('mobile')){
@@ -319,6 +320,7 @@ window.onload = function(){
                 tableClasses.push(td)
             }
         }
+
         
     })
 
@@ -334,7 +336,7 @@ window.onload = function(){
         tableClass.removeAttribute('table-class')
         if(tableClass.classList.contains('mobshow')){
             tableClass.style.display = 'none'
-            tableClass.parentElement.outerHTML = `<!--[if !mso]><!-->${tableClass.parentElement.outerHTML}<!--<![endif]-->`
+            tableClass.outerHTML = `<!--[if !mso]><!-->${tableClass.outerHTML}<!--<![endif]-->`
         }
     })
 
