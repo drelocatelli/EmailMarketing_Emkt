@@ -370,7 +370,8 @@ window.onload = function(){
         td.removeAttribute('ata')
         if(td.innerHTML == `
       
-        ` || td.innerHTML == '\n      '){ 
+        ` || td.innerHTML == '\n      ' || td.innerHTML == `
+        `){ 
             if(td.hasAttribute('td-class')){ td.nextElementSibling.setAttribute('td-class', td.getAttribute('td-class')) } if(td.hasAttribute('td-style')){ td.nextElementSibling.setAttribute('td-style', td.getAttribute('td-style')) } td.remove()
         }else{
             if(td.hasAttribute('td-class')){
