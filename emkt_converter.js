@@ -334,6 +334,8 @@ window.onload = function(){
         tableClass.removeAttribute('table-class')
         if(tableClass.classList.contains('mobshow')){
             tableClass.style.display = 'none'
+            let trMobile = tableClass.childNodes[0].childNodes[0].outerHTML
+            trMobile = `<!--[if !mso]><!-->${trMobile}<!--<![endif]-->`
         }
     })
 
@@ -401,7 +403,5 @@ window.onload = function(){
     imgs.forEach(img =>{
         img.setAttribute("border", "0")
     })
-
-    let html = document.querySelector('html')
 
 }
