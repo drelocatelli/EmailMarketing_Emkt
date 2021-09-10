@@ -301,6 +301,9 @@ window.onload = function(){
                     .replace('<body', '<body style="margin:0px; padding:0px;" class="darkmode"')
                     .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
     document.body.outerHTML = '<center>'+bodyReplace+'</center>'
+
+    let htmlCopy = document.querySelector('html').outerHTML.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
+    console.log(htmlCopy)
     
     // table fix size
     let tables = document.querySelectorAll('table');
