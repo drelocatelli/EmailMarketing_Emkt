@@ -7,7 +7,7 @@ window.onload = function(){
     <style type="text/css">
         /* ========================================================================== RESET STYLES ========================================================================== */
         img {
-            max-width: 100%;
+            // max-width: 100%;
         }
         p,
         span,
@@ -284,6 +284,10 @@ window.onload = function(){
         </xml>
     <![endif]-->
     `
+    // let ptFonts = document.querySelectorAll('p');
+    // ptFonts.forEach(pt =>{
+    //     console.dir(pt.style.fontSize)
+    // })
     
     document.querySelector('html').innerHTML += `<!--[if !mso]><!- --> <div style="font-size:0; max-height:0; overflow:hidden; display:none; mso-hide:all;"> <span style="display:none;"><a href="%%profile_center_url%%" alias="Update Profile">Update Profile</a></span> %%[ if 0 == 1 then ]%% %%profile_center_url%% %%[endif]%% %%[ if 0 == 1 then ]%% %%profile_center_url%% %%Member_Busname%%<br>%%Member_Addr%% %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%% %%[endif]%% </div> <!--<![endif]-->` 
     var body = document.body.outerHTML
@@ -292,11 +296,20 @@ window.onload = function(){
                     .replaceAll('<table', '<table align="center" cellpadding="0" class="table100 darkmode" role="presentation"')
                     .replaceAll('<separator', '<table align="center" cellpadding="0" class="table100 darkmode" role="presentation"><tr><td').replaceAll('</separator>', '</table>')
                     .replaceAll('<hero', '<table align="center" cellpadding="0" width="100%" class="hero table100 darkmode" role="presentation"><tr><td data-type="vazio"').replaceAll('</hero>', '</table>')
-                    .replaceAll('<td', '<td class="fs-small text-1"')
+                    .replaceAll('<td', '<td class="fs-small text-1" style="text-align:left;" ')
                     .replaceAll('<img', '<img style="display:inline-block; text-decoration: none; -ms-interpolation-mode: bicubic; color: #000000; font-family: Arial, sans-serif;font-size: 11px; line-height:1;"')
                     .replace('<body', '<body style="margin:0px; padding:0px;" class="darkmode"')
                     .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
     document.body.outerHTML = '<center>'+bodyReplace+'</center>'
+    
+    // table fix size
+    let tables = document.querySelectorAll('table');
+    tables.forEach(tb =>{
+        if(tb.classList.contains('table100')){
+            tb.style = "width:600px!important;"
+            tb.setAttribute('width', '600px');
+        }
+    })
     
     let tds = document.querySelectorAll('td')
 
@@ -402,7 +415,14 @@ window.onload = function(){
     let imgs = document.querySelectorAll('img')
 
     imgs.forEach(img =>{
-        img.setAttribute("border", "0")
+        img.setAttribute("border", "0");
+
+        // set full img
+        if(img.hasAttribute('full')){
+            img.setAttribute('width', '600px');
+            // img.removeAttribute('full')
+        }
     })
 
+    
 }
