@@ -1,5 +1,17 @@
 import os, subprocess
 from shutil import make_archive
+from bs4 import BeautifulSoup
+import re
+
+text = ''
+
+with open('complete.html', 'r+') as file:
+    text += re.sub(r'<script.+?</script>', '', file.read(), flags=re.DOTALL)
+
+os.system('rm complete.html')
+
+with open('complete.html', 'w') as file:
+    file.write(text)
 
 folder = str(subprocess.getoutput(f'basename {os.getcwd()}'))
 
