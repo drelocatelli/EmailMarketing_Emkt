@@ -302,8 +302,17 @@ window.onload = function(){
                     .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
     document.body.outerHTML = '<center>'+bodyReplace+'</center>'
 
+
     let htmlCopy = document.querySelector('html').outerHTML.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
-    console.log(htmlCopy)
+
+    let htmlOut = document.createElement('textarea')
+    htmlOut.innerHTML = htmlCopy
+    htmlOut.style = 'position:fixed; top:0;'
+    htmlOut.onmouseenter = function(ev){
+        htmlOut.select()
+        document.execCommand('copy')
+    }
+    document.body.appendChild(htmlOut)
     
     // table fix size
     let tables = document.querySelectorAll('table');
