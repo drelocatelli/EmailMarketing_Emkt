@@ -107,6 +107,12 @@ window.onload = function(){
                 background-color: #cccccc !important;
             }
         }
+        table,
+td {
+  mso-table-lspace: 0pt !important;
+  mso-table-rspace: 0pt !important;
+}
+
     </style>
     <style type="text/css">
         tbody {
@@ -296,7 +302,7 @@ window.onload = function(){
                     .replaceAll('<table', '<table align="center" cellpadding="0" class="table100 darkmode" role="presentation"')
                     .replaceAll('<separator', '<table align="center" cellpadding="0" class="table100 darkmode" role="presentation"><tr><td').replaceAll('</separator>', '</table>')
                     .replaceAll('<hero', '<table align="center" cellpadding="0" width="100%" class="hero table100 darkmode" role="presentation"><tr><td data-type="vazio"').replaceAll('</hero>', '</table>')
-                    .replaceAll('<td', '<td class="fs-small text-1" style="text-align:left;" ')
+                    .replaceAll('<td', '<td class="fs-small text-1" ')
                     .replaceAll('<img', '<img style="display:inline-block; text-decoration: none; -ms-interpolation-mode: bicubic; color: #000000; font-family: Arial, sans-serif;font-size: 11px; line-height:1;"')
                     .replace('<body', '<body style="margin:0px; padding:0px;" class="darkmode"')
                     .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
