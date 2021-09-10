@@ -438,7 +438,7 @@ td {
     htmlCopy = htmlCopy.replace(/<textarea>*<\/textarea>/gm, '').replace('body{background:#333;}', 'body{background:#fff;}')
 
     let htmlOut = document.createElement('textarea')
-    htmlOut.innerHTML = htmlCopy
+    htmlOut.innerHTML = `<html>\n${htmlCopy}</html>`
     htmlOut.style = 'position:fixed; top:0; right:0; width:400px; background:#ccc; color:#444; height:100%; border-left:1px solid #000; '
     htmlOut.ondblclick = function(ev){
         htmlOut.select()
