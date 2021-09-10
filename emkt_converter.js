@@ -302,17 +302,6 @@ window.onload = function(){
                     .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
     document.body.outerHTML = '<center>'+bodyReplace+'</center>'
 
-
-    let htmlCopy = document.querySelector('html').outerHTML.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
-
-    let htmlOut = document.createElement('textarea')
-    htmlOut.innerHTML = htmlCopy
-    htmlOut.style = 'position:fixed; top:0;'
-    htmlOut.onmouseenter = function(ev){
-        htmlOut.select()
-        document.execCommand('copy')
-    }
-    document.body.appendChild(htmlOut)
     
     // table fix size
     let tables = document.querySelectorAll('table');
@@ -415,6 +404,7 @@ window.onload = function(){
         let newstyle = tdStyle.getAttribute('td-style')
         tdStyle.style = newstyle
         tdStyle.removeAttribute('td-style')
+
     })
 
     tdClasses.forEach(tdClass =>{
@@ -435,6 +425,21 @@ window.onload = function(){
             // img.removeAttribute('full')
         }
     })
+
+    document.querySelector('html').innerHTML += '<style>body{background:#333;}</style>'
+
+    let htmlCopy = document.querySelector('html').innerHTML.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
+    htmlCopy = htmlCopy.replace(/<textarea>*<\/textarea>/gm, '').replace('body{background:#333;}', 'body{background:#fff;}')
+
+    let htmlOut = document.createElement('textarea')
+    htmlOut.innerHTML = htmlCopy
+    htmlOut.style = 'position:fixed; top:0; right:0; width:400px; background:#ccc; color:#444; height:100%; border-left:1px solid #000; '
+    htmlOut.ondblclick = function(ev){
+        htmlOut.select()
+        document.execCommand('copy')
+
+    }
+    document.body.appendChild(htmlOut)
 
     
 }
