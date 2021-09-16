@@ -12,6 +12,6 @@ tr-style=""
 td-class=""
 td-style="">
   
-mobile ``atribbute``
+``<separator mobile></separator>`` ``atribbute``
 
- table-class="hide" `desktop attribute`
+``<separator table-class="hide"></separator>`` `desktop attribute`
