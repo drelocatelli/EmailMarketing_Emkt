@@ -12,6 +12,7 @@ tr-class=""
 tr-style=""
 td-class=""
 td-style="">
+</separator>
 ```
   
 ``<separator mobile></separator>`` ``atribbute``
