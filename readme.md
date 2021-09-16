@@ -6,15 +6,12 @@
 ## Separator attributes
 ```
 <separator
-table-class=""
-table-style=""
-tr-class=""
-tr-style=""
-td-class=""
-td-style="">
+table-class="" table-style=""
+tr-class="" tr-style=""
+td-class="" td-style="">
 </separator>
 ```
   
-``<separator mobile></separator>`` ``atribbute``
+``<separator mobile></separator>`` ``mobile atribbute``
 
 ``<separator table-class="hide"></separator>`` `desktop attribute`
