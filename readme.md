@@ -1,5 +1,5 @@
 # Separator tag
-<separator>conteudo</separator> = <table><tr>conteudo<td></td></tr></table>
+``<separator>conteudo</separator>`` = ``<table><tr>conteudo<td></td></tr></table>``
 
 
 
