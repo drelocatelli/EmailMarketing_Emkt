@@ -4,6 +4,7 @@
 
 
 ## Separator attributes
+```
 <separator
 table-class=""
 table-style=""
@@ -11,6 +12,7 @@ tr-class=""
 tr-style=""
 td-class=""
 td-style="">
+```
   
 ``<separator mobile></separator>`` ``atribbute``
 
