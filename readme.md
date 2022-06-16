@@ -15,3 +15,5 @@ td-class="" td-style="">
 ``<separator mobile></separator>`` ``mobile atribbute``
 
 ``<separator table-class="hide"></separator>`` `desktop attribute`
+
+https://www.youtube.com/watch?v=BcMczxnwI_Q
