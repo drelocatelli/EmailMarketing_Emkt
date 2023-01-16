@@ -1,6 +1,6 @@
 
 # Separator tag
-``<separator>conteudo</separator>`` = ``<table><tr><td>conteudo</td></tr></table>``
+``<separator>conteudo</separator>`` = ``<table><tr><td>conteudo</td></tr></table>`` with userful attributes
 
 
 
