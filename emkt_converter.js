@@ -24,7 +24,7 @@ window.onload = function () {
         }
         table,
         td {
-            line-height: 0;
+            //line-height: 0;
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
