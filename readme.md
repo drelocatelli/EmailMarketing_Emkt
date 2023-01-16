@@ -1,4 +1,5 @@
 
+
 # Separator tag
 ``<separator>conteudo</separator>`` = ``<table><tr><td>conteudo</td></tr></table>`` with userful attributes
 
@@ -12,6 +13,9 @@ tr-class="" tr-style=""
 td-class="" td-style="">
 </separator>
 ```
+- table-class/table-style: class for generated table/style for generated table
+- tr-class/tr-style: class for generated tr/style for generated tr
+- td-class/td-style: class for generated td/style for generated td
   
 ## Mobile or desktop Attribute  
 
