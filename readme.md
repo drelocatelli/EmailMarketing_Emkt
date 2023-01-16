@@ -1,4 +1,6 @@
-
+# How to use
+Open the `minified.html` on browser
+Write the code inside `<body>` and `</body>` tag
 
 # Separator tag
 ``<separator>conteudo</separator>`` = ``<table><tr><td>conteudo</td></tr></table>`` with userful attributes
