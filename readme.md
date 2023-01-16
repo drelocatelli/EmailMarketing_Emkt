@@ -16,4 +16,22 @@ td-class="" td-style="">
 
 ``<separator table-class="hide"></separator>`` `desktop attribute`
 
+```
+# Use
+<column>
+  <row>
+  content
+  </row>
+</column>
+
+# instead of
+<table>
+  <tr>
+    <td>content</td>
+  </tr>
+</table>
+```
+
+# Video tutorial
+
 https://www.youtube.com/watch?v=BcMczxnwI_Q
