@@ -3,7 +3,7 @@
 
 
 
-## Separator attributes
+## Separator and attributes
 ```
 <separator
 table-class="" table-style=""
@@ -12,10 +12,12 @@ td-class="" td-style="">
 </separator>
 ```
   
+# Mobile or desktop Attribute  
 ``<separator mobile></separator>`` ``mobile atribbute``
 
 ``<separator table-class="hide"></separator>`` `desktop attribute`
 
+# Use instead of
 ```
 # Use
 <column>
