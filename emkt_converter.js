@@ -1,7 +1,8 @@
-window.onload = function(){
-
+window.onload = function () {
     // add meta tags
-    document.querySelector('head').innerHTML += `<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <!--[if !mso><!--> <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!--<![endif--> <meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;" name="viewport"> <meta name="viewport" content="width=device-width"> <meta name="x-apple-disable-message-reformatting"> <meta name="format-detection" content="telephone=no"> <meta name="color-scheme" content="light dark">`
+    document.querySelector(
+        'head',
+    ).innerHTML += `<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <!--[if !mso><!--> <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!--<![endif--> <meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;" name="viewport"> <meta name="viewport" content="width=device-width"> <meta name="x-apple-disable-message-reformatting"> <meta name="format-detection" content="telephone=no"> <meta name="color-scheme" content="light dark">`;
     // add styles and responsivity
     document.querySelector('head').innerHTML += `
     <style type="text/css">
@@ -289,163 +290,221 @@ td {
             <o:OfficeDocumentSettings> <o:AllowPNG /> <o:PixelsPerInch>96</o:PixelsPerInch> </o:OfficeDocumentSettings>
         </xml>
     <![endif]-->
-    `
+    `;
     // let ptFonts = document.querySelectorAll('p');
     // ptFonts.forEach(pt =>{
     //     console.dir(pt.style.fontSize)
     // })
+
+    // create row & columns
+    let rows = document.querySelectorAll('row');
+
+    for(let i = 0; i < rows.length; i++) {
+        console.log('row', rows[i]);
+        let td = document.createElement('td');
+        td.innerHTML = rows[i].innerHTML.trim('\s\n');
+        td.id = `row-${i}`;
     
-    document.querySelector('html').innerHTML += `<!--[if !mso]><!- --> <div style="font-size:0; max-height:0; overflow:hidden; display:none; mso-hide:all;"> <span style="display:none;"><a href="%%profile_center_url%%" alias="Update Profile">Update Profile</a></span> %%[ if 0 == 1 then ]%% %%profile_center_url%% %%[endif]%% %%[ if 0 == 1 then ]%% %%profile_center_url%% %%Member_Busname%%<br>%%Member_Addr%% %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%% %%[endif]%% </div> <!--<![endif]-->` 
-    var body = document.body.outerHTML
-    
+        // grab all original attributes
+        let attrs = rows[i].attributes;
+        for(let attr of attrs) td.setAttribute(attr?.nodeName, attr?.nodeValue);
+        td.innerHTML = rows[i].innerHTML.trim('\s\n');
+
+        const col = rows[i].parentNode;
+        col.appendChild(td);
+        col.removeChild(rows[i]);
+    }
+
+    let columns = document.body.querySelectorAll('column');
+    for(let i = 0; i < columns.length; i++) {
+        console.log('column', columns[i]);
+
+        let table = document.createElement('table');
+        table.id = `col-${i}`;
+        let tr = document.createElement('tr');
+        let attrs = columns[i].attributes;
+        for(let attr of attrs) tr.setAttribute(attr?.nodeName, attr?.nodeValue);
+
+        let htmlChildren = '';
+        
+        for(let element of columns[i].children) {
+            htmlChildren += element.outerHTML;
+        }
+        tr.insertAdjacentHTML('beforeend', htmlChildren);
+        table.appendChild(tr);
+        const parent = columns[i].parentNode;
+        parent.prepend(table)
+
+        columns[i].remove()
+    }
+
+    document.querySelector(
+        'html',
+    ).innerHTML += `<!--[if !mso]><!- --> <div style="font-size:0; max-height:0; overflow:hidden; display:none; mso-hide:all;"> <span style="display:none;"><a href="%%profile_center_url%%" alias="Update Profile">Update Profile</a></span> %%[ if 0 == 1 then ]%% %%profile_center_url%% %%[endif]%% %%[ if 0 == 1 then ]%% %%profile_center_url%% %%Member_Busname%%<br>%%Member_Addr%% %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%% %%[endif]%% </div> <!--<![endif]-->`;
+    var body = document.body.outerHTML;
+
     let bodyReplace = body
-                    .replaceAll('<table', '<table align="center" cellpadding="0" class="table100 darkmode" role="presentation"')
-                    .replaceAll('<separator', '<table align="center" cellpadding="0" class="table100 darkmode" role="presentation"><tr><td').replaceAll('</separator>', '</table>')
-                    .replaceAll('<hero', '<table align="center" cellpadding="0" width="100%" class="hero table100 darkmode" role="presentation"><tr><td data-type="vazio"').replaceAll('</hero>', '</table>')
-                    .replaceAll('<td', '<td class="fs-small text-1" ')
-                    .replaceAll('<img', '<img style="display:inline-block; text-decoration: none; -ms-interpolation-mode: bicubic; color: #000000; font-family: Arial, sans-serif;font-size: 11px; line-height:1;"')
-                    .replace('<body', '<body style="margin:0px; padding:0px;" class="darkmode"')
-                    .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
-    document.body.outerHTML = '<center>'+bodyReplace+'</center>'
+        .replaceAll('<table', '<table align="center" cellpadding="0" class="table100 darkmode" role="presentation"')
+        .replaceAll('<separator', '<table align="center" cellpadding="0" class="table100 darkmode" role="presentation"><tr><td')
+        .replaceAll('</separator>', '</table>')
+        .replaceAll(
+            '<hero',
+            '<table align="center" cellpadding="0" width="100%" class="hero table100 darkmode" role="presentation"><tr><td data-type="vazio"',
+        )
+        .replaceAll('</hero>', '</table>')
+        .replaceAll('<td', '<td class="fs-small text-1" ')
+        .replaceAll(
+            '<img',
+            '<img style="display:inline-block; text-decoration: none; -ms-interpolation-mode: bicubic; color: #000000; font-family: Arial, sans-serif;font-size: 11px; line-height:1;"',
+        )
+        .replace('<body', '<body style="margin:0px; padding:0px;" class="darkmode"')
+        .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');
+    document.body.outerHTML = '<center>' + bodyReplace + '</center>';
 
     
+
     // table fix size
     let tables = document.querySelectorAll('table');
-    tables.forEach(tb =>{
-        if(tb.classList.contains('table100')){
-            tb.style = "width:600px!important;"
+    tables.forEach((tb) => {
+        if (tb.classList.contains('table100')) {
+            tb.style = 'width:600px!important;';
             tb.setAttribute('width', '600px');
         }
-    })
-    
-    let tds = document.querySelectorAll('td')
+    });
+
+    let tds = document.querySelectorAll('td');
 
     // Modifica class/style da table
-    let tableStyles = new Array()
-    let tableClasses = new Array()
+    let tableStyles = new Array();
+    let tableClasses = new Array();
 
-    tds.forEach(td =>{
-          
+    tds.forEach((td) => {
         // mobile table
 
-        if(td.hasAttribute('mobile')){
-            td.classList.add('mobshow')
-            td.removeAttribute('mobile')            
-            tableClasses.push(td)
-        }else{
-            if(td.hasAttribute('table-style')){
-                tableStyles.push(td)
+        if (td.hasAttribute('mobile')) {
+            td.classList.add('mobshow');
+            td.removeAttribute('mobile');
+            tableClasses.push(td);
+        } else {
+            if (td.hasAttribute('table-style')) {
+                tableStyles.push(td);
             }
-            if(td.hasAttribute('table-class')){
-                tableClasses.push(td)
+            if (td.hasAttribute('table-class')) {
+                tableClasses.push(td);
             }
         }
+    });
 
-        
-    })
+    tableStyles.forEach((tableStyle) => {
+        let newstyle = tableStyle.getAttribute('table-style');
+        tableStyle.offsetParent.style = newstyle;
+        tableStyle.removeAttribute('table-style');
+    });
 
-    tableStyles.forEach(tableStyle =>{
-        let newstyle = tableStyle.getAttribute('table-style')
-        tableStyle.offsetParent.style = newstyle
-        tableStyle.removeAttribute('table-style')
-    })
-
-    tableClasses.forEach(tableClass =>{
-        let classe = tableClass.getAttribute('table-class')
-        tableClass.offsetParent.classList.add(classe)
-        tableClass.removeAttribute('table-class')
-        if(tableClass.classList.contains('mobshow')){
-            tableClass.style.display = 'none'
-            tableClass.outerHTML = `<!--[if !mso]><!-->${tableClass.outerHTML}<!--<![endif]-->`
+    tableClasses.forEach((tableClass) => {
+        let classe = tableClass.getAttribute('table-class');
+        tableClass.offsetParent.classList.add(classe);
+        tableClass.removeAttribute('table-class');
+        if (tableClass.classList.contains('mobshow')) {
+            tableClass.style.display = 'none';
+            tableClass.outerHTML = `<!--[if !mso]><!-->${tableClass.outerHTML}<!--<![endif]-->`;
         }
-    })
+    });
 
-     // Modifica class/style da tr
-     let trStyles = new Array()
-     let trClasses = new Array()
+    // Modifica class/style da tr
+    let trStyles = new Array();
+    let trClasses = new Array();
 
-     tds.forEach(td =>{
-         if(td.hasAttribute('tr-style')){
-            trStyles.push(td)
-         }
-         if(td.hasAttribute('tr-class')){
-            trClasses.push(td)
+    tds.forEach((td) => {
+        if (td.hasAttribute('tr-style')) {
+            trStyles.push(td);
         }
-     })
- 
-     trStyles.forEach(trStyle =>{
-         let newstyle = trStyle.getAttribute('tr-style')
-         trStyle.parentElement.style = newstyle
-         trStyle.removeAttribute('tr-style')
-     })
+        if (td.hasAttribute('tr-class')) {
+            trClasses.push(td);
+        }
+    });
 
-     trClasses.forEach(trClass =>{
-        let classe = trClass.getAttribute('tr-class')
-        trClass.offsetParent.classList.add(classe)
-        trClass.removeAttribute('tr-class')
-    })
+    trStyles.forEach((trStyle) => {
+        let newstyle = trStyle.getAttribute('tr-style');
+        trStyle.parentElement.style = newstyle;
+        trStyle.removeAttribute('tr-style');
+    });
+
+    trClasses.forEach((trClass) => {
+        let classe = trClass.getAttribute('tr-class');
+        trClass.offsetParent.classList.add(classe);
+        trClass.removeAttribute('tr-class');
+    });
 
     // Modifica class/style da td
-    let tdClasses = new Array()
-    let tdStyles = new Array()
+    let tdClasses = new Array();
+    let tdStyles = new Array();
 
-    tds.forEach(td =>{
-        td.removeAttribute('ata')
-        if(td.innerHTML == `
+    tds.forEach((td) => {
+        td.removeAttribute('ata');
+        if (
+            td.innerHTML ==
+                `
       
-        ` || td.innerHTML == '\n      ' || td.innerHTML == `
-        `){ 
-            if(td.hasAttribute('td-class')){ td.nextElementSibling.setAttribute('td-class', td.getAttribute('td-class')) } if(td.hasAttribute('td-style')){ td.nextElementSibling.setAttribute('td-style', td.getAttribute('td-style')) } td.remove()
-        }else{
-            if(td.hasAttribute('td-class')){
-                tdClasses.push(td)
+        ` ||
+            td.innerHTML == '\n      ' ||
+            td.innerHTML ==
+                `
+        `
+        ) {
+            if (td.hasAttribute('td-class')) {
+                td.nextElementSibling.setAttribute('td-class', td.getAttribute('td-class'));
             }
-            if(td.hasAttribute('td-style')){
-                tdStyles.push(td)
+            if (td.hasAttribute('td-style')) {
+                td.nextElementSibling.setAttribute('td-style', td.getAttribute('td-style'));
+            }
+            td.remove();
+        } else {
+            if (td.hasAttribute('td-class')) {
+                tdClasses.push(td);
+            }
+            if (td.hasAttribute('td-style')) {
+                tdStyles.push(td);
             }
         }
-    })
+    });
 
-    tdStyles.forEach(tdStyle =>{
-        let newstyle = tdStyle.getAttribute('td-style')
-        tdStyle.style = newstyle
-        tdStyle.removeAttribute('td-style')
+    tdStyles.forEach((tdStyle) => {
+        let newstyle = tdStyle.getAttribute('td-style');
+        tdStyle.style = newstyle;
+        tdStyle.removeAttribute('td-style');
+    });
 
-    })
-
-    tdClasses.forEach(tdClass =>{
-        let classe = tdClass.getAttribute('td-class')
-        tdClass.classList.add(classe)
-        tdClass.removeAttribute('td-class')
-    })
+    tdClasses.forEach((tdClass) => {
+        let classe = tdClass.getAttribute('td-class');
+        tdClass.classList.add(classe);
+        tdClass.removeAttribute('td-class');
+    });
 
     // propriedade images
-    let imgs = document.querySelectorAll('img')
+    let imgs = document.querySelectorAll('img');
 
-    imgs.forEach(img =>{
-        img.setAttribute("border", "0");
+    imgs.forEach((img) => {
+        img.setAttribute('border', '0');
 
         // set full img
-        if(img.hasAttribute('full')){
+        if (img.hasAttribute('full')) {
             img.setAttribute('width', '600px');
             // img.removeAttribute('full')
         }
-    })
+    });
 
-    document.querySelector('html').innerHTML += '<style>body{background:#333;}</style>'
+    document.querySelector('html').innerHTML += '<style>body{background:#333;}</style>';
 
-    let htmlCopy = document.querySelector('html').innerHTML.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
-    htmlCopy = htmlCopy.replace(/<textarea>*<\/textarea>/gm, '').replace('body{background:#333;}', 'body{background:#fff;}')
+    let htmlCopy = document.querySelector('html').innerHTML.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');
+    htmlCopy = htmlCopy.replace(/<textarea>*<\/textarea>/gm, '').replace('body{background:#333;}', 'body{background:#fff;}');
 
-    let htmlOut = document.createElement('textarea')
-    htmlOut.innerHTML = `<html>\n${htmlCopy}</html>`
-    htmlOut.style = 'position:fixed; top:0; right:0; width:400px; background:#ccc; color:#444; height:100%; border-left:1px solid #000; '
-    htmlOut.ondblclick = function(ev){
-        htmlOut.select()
-        document.execCommand('copy')
-
-    }
-    document.body.appendChild(htmlOut)
-
-    
-}
+    let htmlOut = document.createElement('textarea');
+    htmlOut.innerHTML = `<html>\n${htmlCopy}</html>`;
+    htmlOut.style = 'position:fixed; top:0; right:0; width:400px; background:#ccc; color:#444; height:100%; border-left:1px solid #000; ';
+    htmlOut.ondblclick = function (ev) {
+        htmlOut.select();
+        document.execCommand('copy');
+    };
+    document.body.appendChild(htmlOut);
+};
