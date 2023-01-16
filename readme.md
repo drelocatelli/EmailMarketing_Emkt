@@ -24,7 +24,7 @@ td-class="" td-style="">
  - For desktop
 ``<separator table-class="hide"></separator>`` `
 
-## Don't use TR tag 
+## Don't use TR with TD tag 
 ```
 # Use
 <column>
