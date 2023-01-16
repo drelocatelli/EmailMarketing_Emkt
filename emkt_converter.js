@@ -300,7 +300,6 @@ td {
     let rows = document.querySelectorAll('row');
 
     for(let i = 0; i < rows.length; i++) {
-        console.log('row', rows[i]);
         let td = document.createElement('td');
         td.innerHTML = rows[i].innerHTML.trim('\s\n');
         td.id = `row-${i}`;
@@ -317,8 +316,6 @@ td {
 
     let columns = document.body.querySelectorAll('column');
     for(let i = 0; i < columns.length; i++) {
-        console.log('column', columns[i]);
-
         let table = document.createElement('table');
         table.id = `col-${i}`;
         let tr = document.createElement('tr');
@@ -332,8 +329,17 @@ td {
         }
         tr.insertAdjacentHTML('beforeend', htmlChildren);
         table.appendChild(tr);
-        const parent = columns[i].parentNode;
         columns[i].replaceWith(table);
+    }
+
+    // create texts
+    let texts = document.querySelectorAll('text');
+    for(let [index, text] of texts.entries()) {
+        let span = document.createElement('span');
+        span.style = 'line-height: 1.4em';
+        span.innerText = text.innerText;
+        span.id = `text-${index}`;
+        text.replaceWith(span);
     }
 
     document.querySelector(
@@ -342,7 +348,6 @@ td {
     var body = document.body.outerHTML;
 
     let bodyReplace = body
-        .replaceAll('<text>', '<span style="line-height: 1.4;">').replaceAll('</text>', '</span>')
         .replaceAll('<table', '<table align="center" cellpadding="0" class="table100 darkmode" role="presentation"')
         .replaceAll('<separator', '<table align="center" cellpadding="0" class="table100 darkmode" role="presentation"><tr><td')
         .replaceAll('</separator>', '</table>')
