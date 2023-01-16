@@ -24,7 +24,7 @@ window.onload = function () {
         }
         table,
         td {
-            //line-height: 0;
+            line-height: 0;
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
@@ -344,6 +344,7 @@ td {
     var body = document.body.outerHTML;
 
     let bodyReplace = body
+        .replaceAll('<text>', '<span style="line-height: 1.4;">').replaceAll('</text>', '</span>')
         .replaceAll('<table', '<table align="center" cellpadding="0" class="table100 darkmode" role="presentation"')
         .replaceAll('<separator', '<table align="center" cellpadding="0" class="table100 darkmode" role="presentation"><tr><td')
         .replaceAll('</separator>', '</table>')

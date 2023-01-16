@@ -41,7 +41,9 @@ td-class="" td-style="">
     <td>content</td>
   </tr>
 </table>
-```
+``` 
+# Use `<text>` tag 
+Use text tag to insert the line-height
 
 # Video tutorial
 https://www.youtube.com/watch?v=BcMczxnwI_Q
