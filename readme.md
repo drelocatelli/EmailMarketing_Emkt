@@ -17,7 +17,7 @@ td-class="" td-style="">
 - tr-class/tr-style: class for generated tr/style for generated tr
 - td-class/td-style: class for generated td/style for generated td
   
-## Mobile or desktop Attribute  
+## Mobile or Desktop Attribute  
 
  - For mobile
 ``<separator mobile></separator>``
