@@ -333,9 +333,7 @@ td {
         tr.insertAdjacentHTML('beforeend', htmlChildren);
         table.appendChild(tr);
         const parent = columns[i].parentNode;
-        parent.prepend(table)
-
-        columns[i].remove()
+        columns[i].replaceWith(table);
     }
 
     document.querySelector(
