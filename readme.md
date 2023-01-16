@@ -1,3 +1,4 @@
+
 # Separator tag
 ``<separator>conteudo</separator>`` = ``<table><tr><td>conteudo</td></tr></table>``
 
@@ -12,12 +13,14 @@ td-class="" td-style="">
 </separator>
 ```
   
-# Mobile or desktop Attribute  
-``<separator mobile></separator>`` ``mobile atribbute``
+## Mobile or desktop Attribute  
 
-``<separator table-class="hide"></separator>`` `desktop attribute`
+ - For mobile
+``<separator mobile></separator>``
+ - For desktop
+``<separator table-class="hide"></separator>`` `
 
-# Use instead of
+## Don't use TR tag 
 ```
 # Use
 <column>
@@ -35,5 +38,4 @@ td-class="" td-style="">
 ```
 
 # Video tutorial
-
 https://www.youtube.com/watch?v=BcMczxnwI_Q
